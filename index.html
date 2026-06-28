@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 World Cup 2026 Team Playlists</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --spotify-green: #1db954;
+            --youtube-red: #ff0000;
+            --accent-blue: #38bdf8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #38bdf8, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Quick Navigation Grid */
+        .nav-section {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .nav-section h2 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            background-color: #0f172a;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid #334155;
+        }
+
+        .nav-link:hover {
+            background-color: var(--accent-blue);
+            color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        /* Teams Content Grid */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            scroll-margin-top: 20px;
+        }
+
+        .team-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-btn {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .top-btn:hover {
+            color: var(--accent-blue);
+        }
+
+        .song-category {
+            margin-bottom: 1rem;
+        }
+
+        .category-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .song-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .action-links {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .btn-spotify { background-color: var(--spotify-green); }
+        .btn-youtube { background-color: var(--youtube-red); }
+
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 2rem; }
+            .teams-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🏆 World Cup 2026 Playlists</h1>
+        <p>Explore official and fan-favorite anthems, warm-ups, and goal tracks for all qualifying nations.</p>
+    </header>
+
+    <div class="nav-section">
+        <h2>Jump to Country</h2>
+        <div class="nav-grid" id="navGrid"></div>
+    </div>
+
+    <div class="teams-grid" id="teamsContainer"></div>
+
+    <footer>
+        <p>&copy; 2026 World Cup Music Hub. Built for soccer and music fans globally.</p>
+    </footer>
+</div>
+
+<script>
+    // Embedded structured data containing your complete text file list
+    const playlistData = [
+        { country: "Algeria", flag: "🇩🇿", tracks: { signature: "Disco Maghreb (DJ Snake)", warmup: "Summer Rai Mix (Trabic Music); Chey Kbir Ya Omri (Bilal Milano)", goal: "Viva L’algerie (Mahfoud & Sonia)", postmatch: "Viva L’algerie (Mahfoud & Sonia); El Baloun Ydour-ElKhadraoui Sofican (DJAM); Khalik Liya Ya Bladi (Cheb Mohamed Lamine)" }},
+        { country: "Argentina", flag: "🇦🇷", tracks: { signature: "La Cumbia de los trapos (Yerba Brava); Pa’ la Selección (LA T Y LA M)", warmup: "El Matador (Los Fabulosos Cadillacs); Hablando de la libertad (La Renga); Marado (Los Piojos)", goal: "El Matador (Los Fabulosos Cadillacs); La Danza De Los Mirlos (Los Mirlos)", postmatch: "Cumbia sobre el mar (Flowering Inferno & Quantic); La Cumbia de los trapos (Yerba Brava)" }},
+        { country: "Australia", flag: "🇦🇺", tracks: { signature: "Down Under (Men at Work)", warmup: "Tieduprightnow (Parcels); Joker & The Thief (Wolfmother); Highway to Hell (AC/DC); Don’t Change (INXS)", goal: "Thunderstruck (AC/DC); On My Mind (Powderfinger)", postmatch: "Untouched (The Veronicas)" }},
+        { country: "Austria", flag: "🇦🇹", tracks: { signature: "I am from Austria (Rainhard Fendrich)", warmup: "Rock Me Amadeus (Falco); Sweet Caroline (DJ Otzi); Baby (Justin Bieber)", goal: "Maria (I Like It Loud) (Scooter)", postmatch: "Freed from Desire (Gala); I am from Austria (Rainhard Fendrich)" }},
+        { country: "Belgium", flag: "🇧🇪", tracks: { signature: "Ta fete (Stromae); Warrior (Oscar and the Wolf)", warmup: "Pump Up The Jam (Technotronic); Kiss The Grass (Sylvie Kreusch & Romeo Elvis); Makina Time (Dimitri Vegas & Like Mike, Marlon Hoffstadt & DJ Konik)", goal: "We are Belgium (24AM); Allez Allez (GOOOAAAAL)", postmatch: "Alors On Danse (Stromae); We are Belgium (24AM); On Met La Patate (Omdat Het Kan & Average Rob)" }},
+        { country: "Bosnia & Herzegovina", flag: "🇧🇦", tracks: { signature: "Bosnom behar probeharao (Dino Merlin); Ljiljani (Halid Beslic)", warmup: "Bosanac (Enes Begovic); Jel Sarajevo gdje je nekad bilo (Dino Merlin); Necu necu dijamante (Halid Beslic)", goal: "Take Me To America (Salvatore Ganacci)", postmatch: "Ljiljani (Halid Beslic); U.S.A. (Dubioza Kolektiv)" }},
+        { country: "Brazil", flag: "🇧🇷", tracks: { signature: "Bate no Peito (Papatinho)", warmup: "Deixa a Vida Me Levar (Zeca Pagodinho); Dengo (João Gomes); E uma Partida de Futebol (Skank); Hoje (LUDMILLA); Passe a Respeitar (feat. DJ Chernobyl) (Papatinho, Naldo Benny, Fernanda Abreu & BK)", goal: "Bate no Peito (Papatinho)", postmatch: "Festa (Ivete Sangalo); P do Pecado (Ao Vivo) (Grupo Menos E Mais & Simone Mendes)" }},
+        { country: "Cape Verde", flag: "🇨🇻", tracks: { signature: "NOS ORA DJA TXIGA (Federacao Cabo Verdiana de Futebol)", warmup: "", goal: "NOS ORA DJA TXIGA (Federacao Cabo Verdiana de Futebol)", postmatch: "" }},
+        { country: "Canada", flag: "🇨🇦", tracks: { signature: "A Boogie Wit Da Hoodie v2 (King of My City); Wonderful (Travis Scott)", warmup: "Born Winner (AP Dhillon); TRYNA WIN (NorthSideBenji, Boi-1da & Canada Soccer)", goal: "I Dare You (Tasty)", postmatch: "Headlines (Drake); Charger (feat. MC YOSHI, Mauvais djo & Kokosvoice) (TRIANGLE DES BERMUDES)" }},
+        { country: "Colombia", flag: "🇨🇴", tracks: { signature: "La Invitacion (Jorge Celedon)", warmup: "Que Linda E’; Yo Te Aliento (La Barra Incondicional)", goal: "El Ritmo Que Nos Une (Ryan Castro & SOG); Si, Si, Si (La Fiebre Amarillo)", postmatch: "Mi Gente (J Balvin)" }},
+        { country: "Ivory Coast", flag: "🇨🇮", tracks: { signature: "Fimbu (feat. Didi B & Tam Sir); Coup du Marteau (Tam Sir); C’est Dose (Serge Beynaud)", warmup: "", goal: "Coup du Marteau (Tam Sir)", postmatch: "Y’a Dieu Dedans (Paulo Chakal & Didi B)" }},
+        { country: "Croatia", flag: "🇭🇷", tracks: { signature: "Moja Domovina (Hrvatski Band Aid)", warmup: "Moja Domovina (Hrvatski Band Aid)", goal: "Svijet Voli Pobjednike (Colonia)", postmatch: "Hrvatska Zastava (Ivan Mandic); Nije U Soldima Sve (Mladen Grdovic & Bepo Matesic)" }},
+        { country: "Curacao", flag: "🇨🇼", tracks: { signature: "Mama Wa (Jeon); Bon Tardi (Kiev & Qshans)", warmup: "Mama Wa (Jeon); Si Senor (Raey); Chekeleke (Raey & Issairo); Caribe (Kilate Tesla, Ir Sais & Jeon)", goal: "BlueWave (Jeon)", postmatch: "" }},
+        { country: "Czech Republic", flag: "🇨🇿", tracks: { signature: "Thunderstruck (AC/DC)", warmup: "", goal: "Seven Nation Army (The White Stripes)", postmatch: "" }},
+        { country: "DR Congo", flag: "🇨🇩", tracks: { signature: "Leopards Fimbu Na Fimbu (Instrumental)", warmup: "", goal: "GIMS Chante Pour Léopard de la RDC", postmatch: "Mbrouss (Jossart Nyoka Longo & Zaïko Langa Langa)" }},
+        { country: "Ecuador", flag: "🇪🇨", tracks: { signature: "Quiero Amanecer Sonando (Papa Chango); Yo Naci Aqui (Juan Fernando Velasco)", warmup: "Vamos Ecuador Siempre Contigo (Jose Victoria); La Tri (Jombriel, Javier Neira & Jotta)", goal: "Si Se Puede (Damiano); Quiero Amanecer Sonando (Papa Chango)", postmatch: "Vuelvo a Nacer en Ecuador (Javier Neira); Nuestro Juramento (Julio Jaramillo)" }},
+        { country: "Egypt", flag: "🇪🇬", tracks: { signature: "Ya Habibty Ya Masr (Shadya)", warmup: "Ana Ebn Masr (Mahmoud El Esseily, Moustafa Hagag & Medhat Saleh); Shagaa Mn Albak; Ya Habebty Ya Masr (Shadya)", goal: "Ya Masr Btemlyha Ezay (Bahaa Sultan); Wala W Amalouha El Regala (Hamada Helal)", postmatch: "Matkhafoosh Ala Masr (Hussain Al Jassmi); Boshret Kheir (Hussain Al Jassmi)" }},
+        { country: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", tracks: { signature: "Sweet Caroline (Neil Diamond)", warmup: "Vindaloo (Fat Les); Angels (Robbie Williams); With a Little Help From My Friends (The Beatles)", goal: "Chase the Sun (Planet Funk)", postmatch: "Sweet Caroline (Neil Diamond); Three Lions (Baddiel, Skinner & The Lightning Seeds)" }},
+        { country: "France", flag: "🇫🇷", tracks: { signature: "Emmenez-moi (Charles Aznavour); Le Chasseur (Michel Delpech)", warmup: "Pile (Gospel Version) (Mauvais Djo); Melodrama (Jordan Patrol); D.A.N.C.E. (Justice)", goal: "One More Time (Daft Punk)", postmatch: "Freed From Desire (Gala); Magic in the Air (Magic System)" }},
+        { country: "Germany", flag: "🇩🇪", tracks: { signature: "Zeit, Dass Sich Was Dreht ($oho Bani, Herbert Grönemeyer & Ericson)", warmup: "Kernkraft 400 (Zombie Nation)", goal: "Major Tom (Peter Schilling)", postmatch: "Tage wie diese (Die Toten Hosen); Der Zug hat keine Bremse (Mia Julia, Malle Anja & Lorenz Buffel)" }},
+        { country: "Ghana", flag: "🇬🇭", tracks: { signature: "Kakalika (DopeNation); Ntem Ntem (King Promise)", warmup: "Ghana Black Stars (2006 World Cup) (Obaayaa Grace Ashly); Gidi Gidi (Fire) (Stonebwoy); STREET CROWN (African Dancehall) (Shatta Wale)", goal: "Kakalika (DopeNation)", postmatch: "Dem Confuse (Shatta Wale); Oofeets (Sarkodie & Prince Bright)" }},
+        { country: "Haiti", flag: "🇭🇹", tracks: { signature: "Toup Pou Yo (Barikad Crew); Dekole (J Perry feat. Shabba Izolan)", warmup: "Ke M Pa Sote (Boukman Eksperyans); Pepeye (Boukman Eksperyans)", goal: "Alaso (Rockfam); Kool Non (King Posse)", postmatch: "Lobey sou Lobèy (Team Lobey); 4 Kampe (Joe Dwet File)" }},
+        { country: "Iran", flag: "🇮🇷", tracks: { signature: "Teammelli (Parvaz Homay)", warmup: "Teammelli (Parvaz Homay)", goal: "Teammelli (Parvaz Homay)", postmatch: "Teammelli (Parvaz Homay)" }},
+        { country: "Iraq", flag: "🇮🇶", tracks: { signature: "Aash Al Iraq (Rahma Riad); El Basrah Deratkom (Hussam Alrassam); Nashhad An La (Nasrat Al Bader Salem); Annan Iraqi (Hamza Al Mhamadawi); Hassouni (Mohamed Al Mddlool); Iraqi Hala Ya Saab (Hussam Alrassam); Farht Shah (Hosam Kamel)", warmup: "", goal: "", postmatch: "" }},
+        { country: "Japan", flag: "🇯🇵", tracks: { signature: "Syouri No Emi Wo Kimi To (Ukasuka-G)", warmup: "", goal: "Syouri No Emi Wo Kimi To (Ukasuka-G)", postmatch: "KESHIKI (JI Blue, JO1 & INI)" }},
+        { country: "Jordan", flag: "🇯🇴", tracks: { signature: "Ennashama Official Tournament Song (JFA Music)", warmup: "
